@@ -10,8 +10,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
-import com.example.android.justjava.R;
-
 import java.text.NumberFormat;
 
 /**
@@ -28,7 +26,11 @@ public class MainActivity extends AppCompatActivity {
     /**
      * This method is called when the order button is clicked.
      */
-    int quantity = 2;
+    public void displayMessage(String message) {
+        TextView priceTextView = (TextView) findViewById(R.id.price_text_view);
+        priceTextView.setText("Total: " + NumberFormat.getCurrencyInstance().format(quantity * 5) + "\nThank you!");
+    }
+    int quantity = 0;
     public void increment(View view) {
         quantity = quantity + 1;
         display(quantity);
@@ -38,8 +40,8 @@ public class MainActivity extends AppCompatActivity {
         display(quantity);
     }
     public void submitOrder(View view) {
-        display(quantity);
-        displayPrice(quantity * 5);
+        String priceMessage = "Free";
+        displayMessage(priceMessage);
     }
 
     /**
