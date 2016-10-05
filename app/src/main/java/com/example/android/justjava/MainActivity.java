@@ -28,20 +28,24 @@ public class MainActivity extends AppCompatActivity {
      */
     public void displayMessage(String message) {
         TextView priceTextView = (TextView) findViewById(R.id.price_text_view);
-        priceTextView.setText("Total: " + NumberFormat.getCurrencyInstance().format(quantity * 5) + "\nThank you!");
+        priceTextView.setText(message);
     }
+
     int quantity = 0;
+
     public void increment(View view) {
         quantity = quantity + 1;
         display(quantity);
     }
+
     public void decrement(View view) {
         quantity = quantity - 1;
         display(quantity);
     }
+
     public void submitOrder(View view) {
-        String priceMessage = "Free";
-        displayMessage(priceMessage);
+        int price = calculatePrice();
+        displayMessage(createOrderSummary(price));
     }
 
     /**
@@ -58,5 +62,26 @@ public class MainActivity extends AppCompatActivity {
     private void displayPrice(int number) {
         TextView priceTextView = (TextView) findViewById(R.id.price_text_view);
         priceTextView.setText(NumberFormat.getCurrencyInstance().format(number));
+    }
+
+    /**
+     * Calculates the price of the order.
+     * @return total price
+     */
+    private int calculatePrice() {
+        return quantity * 5;
+    }
+
+    /**
+     * returns a summary of the order
+     * @param priceOfOrder is the price of the order, calculated earlier
+     * @return order summary including name quantity and price
+     */
+    private String createOrderSummary(int priceOfOrder) {
+        String returnString = "Name: Kaptain Kunal";
+        returnString = returnString + "\nQuantity: " + quantity;
+        returnString = returnString + "\nTotal: $" + priceOfOrder;
+        returnString = returnString + "\nThank you!";
+        return returnString;
     }
 }
